@@ -1,31 +1,26 @@
-//Select DOM Items
-const menu=document.querySelector('.menu');
 const menuBtn=document.querySelector('.menu-btn');
-const menuNav=document.querySelector('.menu-nav');
-const menuBranding=document.querySelector('.menu-branding');
-const navItems=document.querySelectorAll('.nav-item');
+const navBar=document.querySelector('.navbar');
+const navLink=document.querySelectorAll('.navlink');
 
-//Set Initial state of menu
-let showMenu=false;
-
-menuBtn.addEventListener('click', toggleMenu);
-
-function toggleMenu(){
-    if(!showMenu){
-        menuBtn.classList.add('close');
-        menu.classList.add('show');
-        menuNav.classList.add('show');
-        menuBranding.classList.add('show');
-        navItems.forEach(item => item.classList.add('show'));
-
-        showMenu=true;
+let menuOpen=false;
+menuBtn.addEventListener('click', () => {
+    if (!menuOpen){
+        // opens menu and transforms menu button on button click
+        menuBtn.classList.add('open');
+        navBar.classList.add('open');
+        menuOpen=true;
+        // closes menu and transforms menu button on link click
+        navLink.forEach((link) => {
+            link.addEventListener('click', () => {
+                menuBtn.classList.remove('open');
+                navBar.classList.remove('open');
+                menuOpen=false;
+            })
+        })
     } else {
-        menuBtn.classList.remove('close');
-        menu.classList.remove('show');
-        menuNav.classList.remove('show');
-        menuBranding.classList.remove('show');
-        navItems.forEach(item => item.classList.remove('show'));
-
-        showMenu=false;
+        // closes menu and transforms menu button on button click
+        menuBtn.classList.remove('open');
+        navBar.classList.remove('open');
+        menuOpen=false;
     }
-}
+});
